@@ -2,9 +2,10 @@ package com.rkubyshkin;
 
 import com.rkubyshkin.model.Resume;
 import com.rkubyshkin.storage.ArrayStorage;
+import com.rkubyshkin.storage.Storage;
 
 public class MainArray {
-    final static ArrayStorage STORAGE = new ArrayStorage();
+    final static Storage STORAGE = new ArrayStorage();
     public static void main(String[] args) {
         Resume r1 = new Resume();
         r1.setUid("resume1");
