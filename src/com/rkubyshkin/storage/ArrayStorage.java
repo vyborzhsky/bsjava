@@ -1,14 +1,14 @@
 package com.rkubyshkin.storage;
 import com.rkubyshkin.model.Resume;
 
+import java.util.Arrays;
+
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size = 0;
 
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            storage[i] = null;
-        }
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
     //if resume not present
@@ -54,11 +54,7 @@ public class ArrayStorage {
     }
 
     public Resume[] getAll() {
-    Resume[] result = new Resume[size];
-        for (int j = 0; j < size; j++) {
-            result[j] = storage[j];
-        }
-        return result;
+        return Arrays.copyOfRange(storage,0, size);
     }
 
     public int size() {
