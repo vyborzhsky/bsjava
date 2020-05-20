@@ -1,8 +1,6 @@
 package com.rkubyshkin.model;
 
-import java.util.Objects;
-
-public class Resume {
+public class Resume implements Comparable<Resume>{
     private String uid;
 
     public void setUid(String uid) {
@@ -28,5 +26,10 @@ public class Resume {
     @Override
     public String toString() {
         return uid;
+    }
+
+    @Override
+    public int compareTo(Resume o) {
+        return uid.compareTo(o.uid);
     }
 }
