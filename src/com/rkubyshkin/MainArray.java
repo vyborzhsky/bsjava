@@ -2,21 +2,40 @@ package com.rkubyshkin;
 
 import com.rkubyshkin.model.Resume;
 import com.rkubyshkin.storage.ArrayStorage;
+import com.rkubyshkin.storage.SortedArrayStorage;
 import com.rkubyshkin.storage.Storage;
 
+import javax.annotation.processing.SupportedSourceVersion;
+
 public class MainArray {
-    final static Storage STORAGE = new ArrayStorage();
+    final static Storage STORAGE = new SortedArrayStorage();
     public static void main(String[] args) {
+        MainArray test = new MainArray();
         Resume r1 = new Resume();
         r1.setUid("resume1");
         Resume r2 = new Resume();
         r2.setUid("resume2");
         Resume r3 = new Resume();
         r3.setUid("resume3");
+        Resume r4 = new Resume();
+        r4.setUid("resume3");
+
 
         STORAGE.save(r1);
         STORAGE.save(r2);
         STORAGE.save(r3);
-        System.out.println(STORAGE.getAll());
+        r3.setUid("resume5");
+        STORAGE.update(r4);
+        STORAGE.delete("resume1");
+        STORAGE.delete("resume33");
+        test.printAll(STORAGE);
+
+
+    }
+
+    public void printAll(Storage storage) {
+        for (int i = 0; i < storage.size(); i++) {
+            System.out.println(storage.getAll()[i].getUid());
+        }
     }
 }
