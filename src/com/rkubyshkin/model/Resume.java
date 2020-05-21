@@ -1,11 +1,17 @@
 package com.rkubyshkin.model;
 
-public class Resume implements Comparable<Resume>{
-    private String uid;
+import java.util.UUID;
 
-    public void setUid(String uid) {
+public class Resume implements Comparable<Resume>{
+    private final String uid;
+
+    public Resume() {
+        this(UUID.randomUUID().toString());
+    }
+    public Resume(String uid) {
         this.uid = uid;
     }
+
     public String getUid(){
         return uid;
     }

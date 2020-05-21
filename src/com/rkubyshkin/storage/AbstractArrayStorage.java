@@ -1,4 +1,7 @@
 package com.rkubyshkin.storage;
+import com.rkubyshkin.exception.ExistStorageException;
+import com.rkubyshkin.exception.NotExistStorageException;
+import com.rkubyshkin.exception.StorageException;
 import com.rkubyshkin.model.Resume;
 
 import java.util.Arrays;
@@ -15,7 +18,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void delete(String uid) {
         int index = getIndex(uid);
         if(index < 0) {
-            System.out.println("RESUME" + uid + "NOT EXIST");
+            throw new NotExistStorageException(uid);
         } else {
             fillDeletedElement(index);
             storage[size - 1] = null;
@@ -26,9 +29,9 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume r) {
         int index = getIndex(r.getUid());
         if (index > 0) {
-            System.out.println("Resume ALREADY EXIST");
+            throw new ExistStorageException(r.getUid());
         } else if (size == STORAGE_LIMIT) {
-            System.out.println("STORAGE OVERFLOW");
+            throw new StorageException("Storage overflow", r.getUid());
         } else {
             insertElement(r, index);
             size++;
@@ -38,7 +41,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void update(Resume r) {
         int index = getIndex(r.getUid());
         if (index == -1) {
-            System.out.println("RESUME" + r.getUid() + "NOT EXIST");
+            throw new NotExistStorageException(r.getUid());
         } else {
             storage[index] = r;
         }
@@ -50,9 +53,8 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uid) {
         int index = getIndex(uid);
-        if(index == -1) {
-            System.out.println("RESUME" + uid + "NOT EXIST");
-            return null;
+        if(index < 0) {
+            throw new NotExistStorageException(uid);
         }
         return storage[index];
     }
