@@ -1,6 +1,7 @@
 package com.rkubyshkin;
 
 import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.storage.ArrayStorage;
 import com.rkubyshkin.storage.SortedArrayStorage;
 import com.rkubyshkin.storage.Storage;
 
@@ -18,6 +19,7 @@ public class MainArray {
         STORAGE.save(r1);
         STORAGE.save(r2);
         STORAGE.save(r3);
+        STORAGE.save(r4);
 
         STORAGE.update(r4);
         STORAGE.delete("resume1");
