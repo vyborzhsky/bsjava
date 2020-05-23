@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 abstract class AbstractStorageTest {
-    private Storage storage;
+    protected static Storage storage;
     public static final String UID1="resume1";
     protected static final Resume RESUME_1 = new Resume(UID1);
     public static final String UID2="resume2";
@@ -66,17 +66,6 @@ abstract class AbstractStorageTest {
         Exception exception = assertThrows(ExistStorageException.class, () -> {
             storage.save(RESUME_1);
         });
-    }
-
-    @Test
-    public void saveOverflow() {
-        for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-            storage.save(new Resume());
-        }
-        Exception exception = assertThrows(StorageException.class, () -> {
-           storage.save(new Resume());
-        });
-
     }
 
     @Test
