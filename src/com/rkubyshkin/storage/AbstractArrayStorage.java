@@ -6,44 +6,39 @@ import com.rkubyshkin.model.Resume;
 
 import java.util.Arrays;
 
-public abstract class AbstractArrayStorage implements Storage {
+public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
+
+    @Override
+    protected boolean isExist(Object index) {
+        return (Integer) index >= 0;
+    }
 
     public int size() {
         return size;
     }
 
-    public void delete(String uid) {
-        int index = getIndex(uid);
-        if(index < 0) {
-            throw new NotExistStorageException(uid);
-        } else {
-            fillDeletedElement(index);
-            storage[size - 1] = null;
-            size--;
-        }
+    @Override
+    protected void doUpdate(Resume r, Object index) {
+        storage[(Integer) index] = r;
     }
 
-    public void save(Resume r) {
-        int index = getIndex(r.getUid());
-        if (index >= 0) {
-            throw new ExistStorageException(r.getUid());
-        } else if (size == STORAGE_LIMIT) {
+    @Override
+    public void doDelete(Object index) {
+        fillDeletedElement((Integer)index);
+        storage[size - 1] = null;
+        size--;
+    }
+
+    @Override
+    protected void doSave(Resume r, Object index) {
+        if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", r.getUid());
         } else {
-            insertElement(r, index);
+            insertElement(r, (Integer) index);
             size++;
-        }
-    }
-
-    public void update(Resume r) {
-        int index = getIndex(r.getUid());
-        if (index == -1) {
-            throw new NotExistStorageException(r.getUid());
-        } else {
-            storage[index] = r;
         }
     }
 
@@ -51,12 +46,9 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOfRange(storage,0, size);
     }
 
-    public Resume get(String uid) {
-        int index = getIndex(uid);
-        if(index < 0) {
-            throw new NotExistStorageException(uid);
-        }
-        return storage[index];
+    @Override
+    public Resume doGet(Object index) {
+        return storage[(Integer)index];
     }
 
     public void clear() {
@@ -64,7 +56,7 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-    protected abstract int getIndex(String uid);
+    protected abstract Integer getSearchKey(String uid);
 
     protected abstract void insertElement(Resume r, int index);
 

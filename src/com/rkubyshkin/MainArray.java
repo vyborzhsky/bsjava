@@ -5,6 +5,8 @@ import com.rkubyshkin.storage.ArrayStorage;
 import com.rkubyshkin.storage.SortedArrayStorage;
 import com.rkubyshkin.storage.Storage;
 
+import java.util.ArrayList;
+
 public class MainArray {
     final static Storage STORAGE = new SortedArrayStorage();
     public static void main(String[] args) {
@@ -13,6 +15,7 @@ public class MainArray {
         Resume r2 = new Resume("resume2");
         Resume r3 = new Resume("resume3");
         Resume r4 = new Resume("resum5");
+        ArrayList list = new ArrayList();
 
 
 

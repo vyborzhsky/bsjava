@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-abstract class AbstractArrayStorageTest {
+abstract class AbstractStorageTest {
     private Storage storage;
     public static final String UID1="resume1";
     protected static final Resume RESUME_1 = new Resume(UID1);
@@ -23,7 +22,7 @@ abstract class AbstractArrayStorageTest {
     public static final String UID4="resume4";
     protected static final Resume RESUME_4 = new Resume(UID4);
 
-    public AbstractArrayStorageTest(Storage storage) {
+    public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 

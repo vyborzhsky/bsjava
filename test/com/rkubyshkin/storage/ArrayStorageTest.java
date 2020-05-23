@@ -1,8 +1,6 @@
 package com.rkubyshkin.storage;
 
-import com.rkubyshkin.model.Resume;
-
-class ArrayStorageTest extends AbstractArrayStorageTest{
+class ArrayStorageTest extends AbstractStorageTest {
     public ArrayStorageTest() {
         super(new ArrayStorage());
     }
