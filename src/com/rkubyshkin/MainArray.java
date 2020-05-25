@@ -27,14 +27,14 @@ public class MainArray {
         STORAGE.update(r4);
         STORAGE.delete("resume1");
         STORAGE.delete("resume33");
-        test.printAll(STORAGE);
+        //test.printAll(STORAGE);
 
 
     }
 
-    public void printAll(Storage storage) {
+    /*public void printAll(Storage storage) {
         for (int i = 0; i < storage.size(); i++) {
-            System.out.println(storage.getAll()[i].getUid());
+            System.out.println(storage.getAllSorted()[i].getUid());
         }
-    }
+    }*/
 }

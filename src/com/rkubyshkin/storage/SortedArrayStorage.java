@@ -3,11 +3,8 @@ package com.rkubyshkin.storage;
 import com.rkubyshkin.model.Resume;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
-
-    private static final Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getUid);
     @Override
     protected Integer getSearchKey(String uid) {
         Resume searchKey = new Resume(uid);

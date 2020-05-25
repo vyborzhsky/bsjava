@@ -1,8 +1,6 @@
 package com.rkubyshkin.storage;
 import com.rkubyshkin.model.Resume;
 
-import java.util.Arrays;
-
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override

@@ -2,53 +2,62 @@ package com.rkubyshkin.storage;
 
 import com.rkubyshkin.model.Resume;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class MapStorage extends AbstractStorage {
-    HashMap<Resume, String> mapStorage = new HashMap<>();
+    private Map<Object, Resume> mapStorage = new HashMap<>();
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return null;
+        return mapStorage.get(searchKey);
     }
 
     @Override
     protected void doSave(Resume r, Object searchKey) {
-
+        mapStorage.put(r.getUid(), r);
     }
 
     @Override
     protected Object getSearchKey(String uid) {
+        for (Map.Entry<Object, Resume> entry : mapStorage.entrySet()) {
+            if (entry.getKey().equals(uid)) {
+                return entry.getKey();
+            }
+        }
         return null;
     }
 
     @Override
     protected void doUpdate(Resume r, Object searchKey) {
-
+        mapStorage.replace(searchKey,r);
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return false;
+        return searchKey != null;
     }
 
     @Override
     protected void doDelete(Object searchKey) {
-
+        mapStorage.remove(searchKey);
     }
 
     @Override
     public void clear() {
-
+        mapStorage.clear();
     }
 
     @Override
-    public Resume[] getAll() {
-        return new Resume[0];
+    public List<Resume> getAllSorted() {
+        TreeMap<Object, Resume> sorted = new TreeMap<>();
+        List<Resume> resumes = new ArrayList<>();
+        sorted.putAll(mapStorage);
+        resumes.addAll(sorted.values());
+        return resumes;
     }
 
     @Override
     public int size() {
-        return 0;
+        return mapStorage.size();
     }
 }
