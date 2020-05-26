@@ -34,7 +34,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return searchKey != null;
+        return mapStorage.containsKey(searchKey);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
+    protected List<Resume> doGetAllSorted() {
         TreeMap<Object, Resume> sorted = new TreeMap<>();
         List<Resume> resumes = new ArrayList<>();
         sorted.putAll(mapStorage);

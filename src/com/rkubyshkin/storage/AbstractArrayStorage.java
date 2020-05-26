@@ -40,21 +40,20 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
             }
         }
 
-        public List<Resume> getAllSorted() {
-            List<Resume> resumes = new ArrayList<>();
-            //Arrays.sort(storage);
-            for (int i = 0; i < storage.length; i++) {
-                if (storage[i] == null) {
-                    break;
-                } else {
-                    resumes.add(storage[i]);
-                }
+    @Override
+    protected List<Resume> doGetAllSorted() {
+        List<Resume> resumes = new ArrayList<>();
+        for (int i = 0; i < storage.length; i++) {
+            if (storage[i] == null) {
+                break;
+            } else {
+                resumes.add(storage[i]);
             }
-            Collections.sort(resumes, RESUME_COMPARATOR);
-            return resumes;
         }
+        return resumes;
+    }
 
-        @Override
+    @Override
         public Resume doGet(Object index) {
             return storage[(Integer) index];
         }

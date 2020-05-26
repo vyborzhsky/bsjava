@@ -3,7 +3,11 @@ package com.rkubyshkin.storage;
 import com.rkubyshkin.exception.ExistStorageException;
 import com.rkubyshkin.exception.NotExistStorageException;
 import com.rkubyshkin.model.Resume;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 
 public abstract class AbstractStorage implements Storage {
@@ -22,6 +26,14 @@ public abstract class AbstractStorage implements Storage {
         Object searchKey = getExistedSearchKey(r.getUid());
         doUpdate(r, searchKey);
     }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        List<Resume> resumes = doGetAllSorted();
+        Collections.sort(resumes, RESUME_COMPARATOR);
+        return resumes;
+    }
+
     public Resume get (String uid) {
         Object searchKey = getExistedSearchKey(uid);
         return doGet(searchKey);
@@ -42,6 +54,7 @@ public abstract class AbstractStorage implements Storage {
         }
         return searchKey;
     }
+    protected abstract List<Resume> doGetAllSorted();
 
     protected abstract Resume doGet(Object searchKey);
 

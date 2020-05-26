@@ -2,39 +2,68 @@ package com.rkubyshkin;
 
 import com.rkubyshkin.model.Resume;
 import com.rkubyshkin.storage.ArrayStorage;
-import com.rkubyshkin.storage.SortedArrayStorage;
 import com.rkubyshkin.storage.Storage;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainArray {
-    final static Storage STORAGE = new SortedArrayStorage();
-    public static void main(String[] args) {
-        MainArray test = new MainArray();
-        Resume r1 = new Resume("resume1");
-        Resume r2 = new Resume("resume2");
-        Resume r3 = new Resume("resume3");
-        Resume r4 = new Resume("resum5");
-        ArrayList list = new ArrayList();
 
-
-
-        STORAGE.save(r1);
-        STORAGE.save(r2);
-        STORAGE.save(r3);
-        STORAGE.save(r4);
-
-        STORAGE.update(r4);
-        STORAGE.delete("resume1");
-        STORAGE.delete("resume33");
-        //test.printAll(STORAGE);
-
-
+    final static Storage STORAGE = new ArrayStorage();
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Resume r;
+        while (true) {
+            System.out.print("Enter one of this command - (list | save fullName | delete uid | get uid | update uid fullName | clear");
+            String[] params = reader.readLine().trim().toLowerCase().split(" ");
+            if (params.length < 1 || params.length > 3) {
+                System.out.println("Wrong command");
+                continue;
+        }
+            String param = null;
+            if (params.length > 1 ) {
+                param = params[1];
+            }
+            switch (params[0]) {
+                case "list":
+                    printAll();
+                    break;
+                case "size":
+                    System.out.println(STORAGE.size());
+                    break;
+                case "save":
+                    r = new Resume(param);
+                    STORAGE.save(r);
+                    break;
+                case "update":
+                    r = new Resume(param, params[2]);
+                    STORAGE.update(r);
+                    printAll();
+                    break;
+                case "delete":
+                    STORAGE.delete(param);
+                    printAll();
+                    break;
+                case "get":
+                    System.out.println(STORAGE.get(param));
+                    break;
+                case "clear":
+                    STORAGE.clear();
+                    printAll();
+                    break;
+                case "exit":
+                    return;
+                default:
+                    System.out.println("Wrong command");
+                    break;
+            }
+        }
     }
 
-    /*public void printAll(Storage storage) {
-        for (int i = 0; i < storage.size(); i++) {
-            System.out.println(storage.getAllSorted()[i].getUid());
-        }
-    }*/
+    private static void printAll() {
+        System.out.println("---");
+        System.out.println(STORAGE.getAllSorted().toString());
+        System.out.println("---");
+    }
 }

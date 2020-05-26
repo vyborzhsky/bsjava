@@ -7,44 +7,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import java.util.List;
 
-abstract class AbstractStorageTest {
+public abstract class AbstractStorageTest {
     protected static Storage storage;
     public static final String UID1="resume1";
-    //public static final String FULL_NAME_1 ="IvanovAP";
-    protected static final Resume RESUME_1 = new Resume(UID1);
+    protected static final String FULL_NAME_1 ="IVANOV_AP";
+    protected static final Resume RESUME_1 = new Resume(UID1,FULL_NAME_1);
     public static final String UID2="resume2";
-    //public static final String FULL_NAME_2 ="PetrovIS";
-    protected static final Resume RESUME_2 = new Resume(UID2);
+    protected static final String FULL_NAME_2 ="PETROV_IS";
+    protected static final Resume RESUME_2 = new Resume(UID2,FULL_NAME_2);
     public static final String UID3="resume3";
-    //public static final String FULL_NAME_3="SuslovIO";
-    protected static final Resume RESUME_3 = new Resume(UID3);
+    protected static final String FULL_NAME_3="SUSLOV_IO";
+    protected static final Resume RESUME_3 = new Resume(UID3,FULL_NAME_3);
     public static final String UID4="resume4";
-    //public static final String FULL_NAME_4="PopovTS";
-    protected static final Resume RESUME_4 = new Resume(UID4);
+    protected static final String FULL_NAME_4="POPOV_TS";
+    protected static final Resume RESUME_4 = new Resume(UID4,FULL_NAME_4);
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
     @BeforeEach
-    public void setup() {
+     public void setUp() {
         storage.clear();
         storage.save(RESUME_2);
         storage.save(RESUME_1);
         storage.save(RESUME_3);
     }
+
     @Test
-    void size() {
+    public void size() {
         assertSize(3);
     }
 
     @Test
-    void delete() throws Exception {
+    public void delete() {
         storage.delete(UID1);
         assertSize(2);
         Exception exception = assertThrows(NotExistStorageException.class, () -> {
@@ -54,13 +55,13 @@ abstract class AbstractStorageTest {
 
     @Test
     public void deleteNotExist() {
-        Exception exception = assertThrows(NotExistStorageException.class, () -> {
+        assertThrows(NotExistStorageException.class, () -> {
             storage.delete("abc");
         });
     }
 
     @Test
-    void save() {
+    public void save() {
         storage.save(RESUME_4);
         assertSize(4);
         assertGet(RESUME_4);;
@@ -74,15 +75,15 @@ abstract class AbstractStorageTest {
     }
 
     @Test
-    void update() {
-        Resume resume = new Resume(UID1);
+    public void update() {
+        Resume resume = new Resume(UID1,FULL_NAME_1);
         storage.update(resume);
         assertTrue(resume == storage.get(UID1));
 
     }
 
     @Test
-    void getAllSorted() {
+    public void getAllSorted() {
         List<Resume> array = storage.getAllSorted();
         assertEquals(3, array.size());
         assertEquals(RESUME_1, array.get(0));
@@ -91,7 +92,7 @@ abstract class AbstractStorageTest {
     }
 
     @Test
-    void get() {
+    public void get() {
         assertGet(RESUME_1);
         assertGet(RESUME_2);
         assertGet(RESUME_3);
@@ -105,7 +106,7 @@ abstract class AbstractStorageTest {
     }
 
     @Test
-    void clear() {
+    public void clear() {
         storage.clear();
         assertSize(0);
     }
