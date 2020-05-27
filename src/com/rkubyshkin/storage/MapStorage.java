@@ -4,22 +4,22 @@ import com.rkubyshkin.model.Resume;
 
 import java.util.*;
 
-public class MapStorage extends AbstractStorage {
-    private Map<Object, Resume> mapStorage = new HashMap<>();
+public class MapStorage extends AbstractStorage<String> {
+    private Map<String, Resume> mapStorage = new HashMap<>();
 
     @Override
-    protected Resume doGet(Object searchKey) {
+    protected Resume doGet(String searchKey) {
         return mapStorage.get(searchKey);
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
+    protected void doSave(Resume r, String searchKey) {
         mapStorage.put(r.getUid(), r);
     }
 
     @Override
-    protected Object getSearchKey(String uid) {
-        for (Map.Entry<Object, Resume> entry : mapStorage.entrySet()) {
+    protected String getSearchKey(String uid) {
+        for (Map.Entry<String, Resume> entry : mapStorage.entrySet()) {
             if (entry.getKey().equals(uid)) {
                 return entry.getKey();
             }
@@ -28,17 +28,17 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
+    protected void doUpdate(Resume r, String searchKey) {
         mapStorage.replace(searchKey,r);
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
+    protected boolean isExist(String searchKey) {
         return mapStorage.containsKey(searchKey);
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
+    protected void doDelete(String searchKey) {
         mapStorage.remove(searchKey);
     }
 
