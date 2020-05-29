@@ -1,70 +1,80 @@
 package com.rkubyshkin.storage;
 
+
 import com.rkubyshkin.exception.ExistStorageException;
 import com.rkubyshkin.exception.NotExistStorageException;
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Person;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 
-public abstract class AbstractStorage implements Storage {
-    protected static final Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getUid);
+public abstract class AbstractStorage<SearchKey> implements Storage {
+    private static final Logger LOGGER = Logger.getLogger(AbstractStorage.class.getName());
+    protected static final Comparator<Person> RESUME_COMPARATOR = Comparator.comparing(Person::getUid);
+
     public void delete(String uid) {
-        Object searchKey = getExistedSearchKey(uid);
+        LOGGER.info(uid + " METHOD DELETE");
+        SearchKey searchKey = getExistedSearchKey(uid);
         doDelete(searchKey);
     }
 
-    public void save(Resume r) {
-        Object searchKey = getNotExistedSearchKey(r.getUid());
+    public void save(Person r) {
+        LOGGER.info(r + " METHOD SAVE");
+        SearchKey searchKey = getNotExistedSearchKey(r.getUid());
         doSave(r, searchKey);
     }
 
-    public void update (Resume r) {
-        Object searchKey = getExistedSearchKey(r.getUid());
+    public void update (Person r) {
+        LOGGER.info(r + " METHOD UPDATE");
+        SearchKey searchKey = getExistedSearchKey(r.getUid());
         doUpdate(r, searchKey);
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        List<Resume> resumes = doGetAllSorted();
-        Collections.sort(resumes, RESUME_COMPARATOR);
-        return resumes;
+    public List<Person> getAllSorted() {
+        LOGGER.info( "GETALLSORTED");
+        List<Person> people = doGetAllSorted();
+        Collections.sort(people, RESUME_COMPARATOR);
+        return people;
     }
 
-    public Resume get (String uid) {
-        Object searchKey = getExistedSearchKey(uid);
+    public Person get (String uid) {
+        LOGGER.info(uid + " METHOD GET");
+        SearchKey searchKey = getExistedSearchKey(uid);
         return doGet(searchKey);
     }
 
-    private  Object getExistedSearchKey(String uid) {
-        Object searchKey = getSearchKey(uid);
+    private  SearchKey getExistedSearchKey(String uid) {
+        LOGGER.warning("resume with uid:" + uid +" not exist");
+        SearchKey searchKey = getSearchKey(uid);
         if (!isExist(searchKey)) {
             throw new NotExistStorageException(uid);
         }
         return searchKey;
     }
 
-    private  Object getNotExistedSearchKey(String uid) {
-        Object searchKey = getSearchKey(uid);
+    private  SearchKey getNotExistedSearchKey(String uid) {
+        LOGGER.warning("resume with uid:" + uid +" already exist");
+        SearchKey searchKey = getSearchKey(uid);
         if (isExist(searchKey)) {
             throw new ExistStorageException(uid);
         }
         return searchKey;
     }
-    protected abstract List<Resume> doGetAllSorted();
+    protected abstract List<Person> doGetAllSorted();
 
-    protected abstract Resume doGet(Object searchKey);
+    protected abstract Person doGet(SearchKey searchKey);
 
-    protected abstract void doSave(Resume r, Object searchKey);
+    protected abstract void doSave(Person r, SearchKey searchKey);
 
-    protected abstract Object getSearchKey(String uid);
+    protected abstract SearchKey getSearchKey(String uid);
 
-    protected abstract void doUpdate(Resume r, Object searchKey);
+    protected abstract void doUpdate(Person r, SearchKey searchKey);
 
-    protected abstract boolean isExist(Object searchKey);
+    protected abstract boolean isExist(SearchKey searchKey);
 
-    protected abstract void doDelete(Object searchKey);
+    protected abstract void doDelete(SearchKey searchKey);
 }

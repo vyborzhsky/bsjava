@@ -1,17 +1,22 @@
 package com.rkubyshkin.model;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Resume implements Comparable<Resume>{
+public class Person implements Comparable<Person>{
     private final String uid;
     private final String fullName;
+    private final Map<Contacts, String> contacts = new EnumMap<>(Contacts.class);
+    private final Map<UnitType, Unit> info = new EnumMap<>(UnitType.class);
 
-    public Resume(String fullName) {
+    public Person(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
 
-    public Resume(String uid, String fullName) {
+    public Person(String uid, String fullName) {
+
         Objects.requireNonNull(fullName, "fullName must not be null");
         Objects.requireNonNull(uid, "uid must not be null");
         this.uid = uid;
@@ -26,9 +31,9 @@ public class Resume implements Comparable<Resume>{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Resume resume = (Resume) o;
-        return uid.equals(resume.uid) &&
-                fullName.equals(resume.fullName);
+        Person person = (Person) o;
+        return uid.equals(person.uid) &&
+                fullName.equals(person.fullName);
     }
 
     @Override
@@ -42,8 +47,12 @@ public class Resume implements Comparable<Resume>{
     }
 
     @Override
-    public int compareTo(Resume o) {
+    public int compareTo(Person o) {
         int compareNames = fullName.compareTo(o.fullName);
         return compareNames != 0 ? compareNames : uid.compareTo(o.uid);
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 }

@@ -1,6 +1,8 @@
 package com.rkubyshkin;
 
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Contacts;
+import com.rkubyshkin.model.UnitType;
+import com.rkubyshkin.model.Person;
 import com.rkubyshkin.storage.ArrayStorage;
 import com.rkubyshkin.storage.Storage;
 
@@ -13,7 +15,7 @@ public class MainArray {
     final static Storage STORAGE = new ArrayStorage();
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Resume r;
+        Person r;
         while (true) {
             System.out.print("Enter one of this command - (list | save fullName | delete uid | get uid | update uid fullName | clear");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
@@ -33,14 +35,14 @@ public class MainArray {
                     System.out.println(STORAGE.size());
                     break;
                 case "save":
-                    r = new Resume(param);
+                    r = new Person(param);
                     STORAGE.save(r);
                     break;
-                case "update":
-                    r = new Resume(param, params[2]);
+               /* case "update":
+                    r = new Person(param, params[2], about, contacts);
                     STORAGE.update(r);
                     printAll();
-                    break;
+                    break;*/
                 case "delete":
                     STORAGE.delete(param);
                     printAll();

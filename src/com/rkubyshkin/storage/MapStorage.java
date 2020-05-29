@@ -1,25 +1,25 @@
 package com.rkubyshkin.storage;
 
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Person;
 
 import java.util.*;
 
 public class MapStorage extends AbstractStorage<String> {
-    private Map<String, Resume> mapStorage = new HashMap<>();
+    private Map<String, Person> mapStorage = new HashMap<>();
 
     @Override
-    protected Resume doGet(String searchKey) {
+    protected Person doGet(String searchKey) {
         return mapStorage.get(searchKey);
     }
 
     @Override
-    protected void doSave(Resume r, String searchKey) {
+    protected void doSave(Person r, String searchKey) {
         mapStorage.put(r.getUid(), r);
     }
 
     @Override
     protected String getSearchKey(String uid) {
-        for (Map.Entry<String, Resume> entry : mapStorage.entrySet()) {
+        for (Map.Entry<String, Person> entry : mapStorage.entrySet()) {
             if (entry.getKey().equals(uid)) {
                 return entry.getKey();
             }
@@ -28,7 +28,7 @@ public class MapStorage extends AbstractStorage<String> {
     }
 
     @Override
-    protected void doUpdate(Resume r, String searchKey) {
+    protected void doUpdate(Person r, String searchKey) {
         mapStorage.replace(searchKey,r);
     }
 
@@ -48,12 +48,11 @@ public class MapStorage extends AbstractStorage<String> {
     }
 
     @Override
-    protected List<Resume> doGetAllSorted() {
-        TreeMap<Object, Resume> sorted = new TreeMap<>();
-        List<Resume> resumes = new ArrayList<>();
-        sorted.putAll(mapStorage);
-        resumes.addAll(sorted.values());
-        return resumes;
+    protected List<Person> doGetAllSorted() {
+        List<Person> people = new ArrayList<>();
+        TreeMap<Object, Person> sorted = new TreeMap<>(mapStorage);
+        people.addAll(sorted.values());
+        return people;
     }
 
     @Override

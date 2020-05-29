@@ -1,18 +1,18 @@
 package com.rkubyshkin.storage;
 
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Person;
 
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     protected Integer getSearchKey(String uid) {
-        Resume searchKey = new Resume(uid, "dummy");
+        Person searchKey = new Person(uid, "dummy", information, contacts);
         return Arrays.binarySearch(storage, 0, size, searchKey, RESUME_COMPARATOR);
     }
 
     @Override
-    protected void insertElement(Resume r, int index) {
+    protected void insertElement(Person r, int index) {
         int insertIndex = -index - 1;
         System.arraycopy(storage, insertIndex, storage, insertIndex + 1, size - insertIndex);
         storage[insertIndex] = r;

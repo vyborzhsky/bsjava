@@ -1,22 +1,22 @@
 package com.rkubyshkin.storage;
 
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ListStorage extends AbstractStorage<Integer> {
-    private List<Resume> list = new ArrayList<>();
+    private List<Person> list = new ArrayList<>();
 
     @Override
-    protected Resume doGet(Integer searchKey) {
+    protected Person doGet(Integer searchKey) {
         return list.get(searchKey);
 
     }
 
     @Override
-    protected void doSave(Resume r, Integer searchKey) {
+    protected void doSave(Person r, Integer searchKey) {
         list.add(r);
     }
 
@@ -31,7 +31,7 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected void doUpdate(Resume r, Integer searchKey) {
+    protected void doUpdate(Person r, Integer searchKey) {
         list.set(searchKey,r);
     }
 
@@ -52,7 +52,7 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected List<Resume> doGetAllSorted() {
+    protected List<Person> doGetAllSorted() {
         return list;
     }
 

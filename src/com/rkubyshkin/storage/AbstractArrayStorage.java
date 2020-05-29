@@ -1,12 +1,12 @@
 package com.rkubyshkin.storage;
 import com.rkubyshkin.exception.StorageException;
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Person;
 
 import java.util.*;
 
 public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         protected static final int STORAGE_LIMIT = 10000;
-        protected Resume[] storage = new Resume[STORAGE_LIMIT];
+        protected Person[] storage = new Person[STORAGE_LIMIT];
         protected int size = 0;
 
         @Override
@@ -19,7 +19,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         }
 
         @Override
-        protected void doUpdate(Resume r, Integer index) {
+        protected void doUpdate(Person r, Integer index) {
             storage[index] = r;
         }
 
@@ -31,7 +31,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         }
 
         @Override
-        protected void doSave(Resume r, Integer index) {
+        protected void doSave(Person r, Integer index) {
             if (size == STORAGE_LIMIT) {
                 throw new StorageException("Storage overflow", r.getUid());
             } else {
@@ -41,20 +41,20 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         }
 
     @Override
-    protected List<Resume> doGetAllSorted() {
-        List<Resume> resumes = new ArrayList<>();
+    protected List<Person> doGetAllSorted() {
+        List<Person> people = new ArrayList<>();
         for (int i = 0; i < storage.length; i++) {
             if (storage[i] == null) {
                 break;
             } else {
-                resumes.add(storage[i]);
+                people.add(storage[i]);
             }
         }
-        return resumes;
+        return people;
     }
 
     @Override
-        public Resume doGet(Integer index) {
+        public Person doGet(Integer index) {
             return storage[index];
         }
 
@@ -65,7 +65,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
         protected abstract Integer getSearchKey(String uid);
 
-        protected abstract void insertElement(Resume r, int index);
+        protected abstract void insertElement(Person r, int index);
 
         protected abstract void fillDeletedElement(int index);
 

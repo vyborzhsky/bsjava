@@ -1,10 +1,10 @@
 package com.rkubyshkin.storage;
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Person;
 
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected void insertElement(Resume r, int index) {
+    protected void insertElement(Person r, int index) {
         storage[size] = r;
     }
 

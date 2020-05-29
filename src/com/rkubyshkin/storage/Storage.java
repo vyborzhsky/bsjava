@@ -1,20 +1,20 @@
 package com.rkubyshkin.storage;
 
-import com.rkubyshkin.model.Resume;
+import com.rkubyshkin.model.Person;
 import java.util.List;
 
 public interface Storage {
     void clear();
 
-    void save(Resume r);
+    void save(Person r);
 
-    Resume get(String uid);
+    Person get(String uid);
 
     void delete(String uid);
 
-    void update(Resume r);
+    void update(Person r);
 
-    List<Resume> getAllSorted();
+    List<Person> getAllSorted();
 
     int size();
 
