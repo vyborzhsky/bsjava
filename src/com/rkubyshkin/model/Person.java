@@ -1,10 +1,13 @@
 package com.rkubyshkin.model;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Person implements Comparable<Person>{
+public class Person implements Comparable<Person>, Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final String uid;
     private final String fullName;
     private Map<ContactsType, String> contacts;
@@ -43,12 +46,14 @@ public class Person implements Comparable<Person>{
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return uid.equals(person.uid) &&
-                fullName.equals(person.fullName);
+                fullName.equals(person.fullName) &&
+                Objects.equals(contacts, person.contacts) &&
+                Objects.equals(info, person.info);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uid, fullName);
+        return Objects.hash(uid, fullName, contacts, info);
     }
 
     @Override

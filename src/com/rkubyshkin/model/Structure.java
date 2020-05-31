@@ -1,9 +1,9 @@
 package com.rkubyshkin.model;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +12,8 @@ import static com.rkubyshkin.util.DateUtil.NOW;
 import static com.rkubyshkin.util.DateUtil.of;
 
 
-public class Structure{
+public class Structure implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final Link homePage;
     private List<StructureListUnit> position;
@@ -48,7 +49,9 @@ public class Structure{
         return Objects.hash(homePage, position);
     }
 
-    public static class StructureListUnit {
+    public static class StructureListUnit implements Serializable{
+        private static final long serialVersionUID = 1L;
+
         private final LocalDate startCareerDate;
         private final LocalDate endCareerDate;
         private final String tittle;

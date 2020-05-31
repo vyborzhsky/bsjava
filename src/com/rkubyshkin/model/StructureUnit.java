@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class StructureUnit extends Unit{
+    private static final long serialVersionUID = 1L;
+
     private final Structure structure;
 
     public StructureUnit(Structure structure) {

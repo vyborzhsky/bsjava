@@ -3,6 +3,8 @@ package com.rkubyshkin.model;
 import java.util.Objects;
 
 public class TextUnit extends Unit{
+    private static final long serialVersionUID = 1L;
+
     private final String textContent;
 
     @Override

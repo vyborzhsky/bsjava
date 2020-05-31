@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.io.File;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractStorageTest {
+    protected static final File DIR_STORAGE = new File("C:/Users/Владимир/Documents/GitHub/bsjava/storage");
     protected static Storage storage;
     public static final String UID1="person1";
     protected static final String FULL_NAME_1 ="IVANOV_AP";
@@ -206,7 +208,7 @@ public abstract class AbstractStorageTest {
     public void update() {
         Person person = new Person(UID1,FULL_NAME_1, INFO_PERSON_1, CONTACTS_PERSON_1);
         storage.update(person);
-        assertTrue(person == storage.get(UID1));
+        assertTrue(person.equals(storage.get(UID1)));
 
     }
 
