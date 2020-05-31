@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -31,10 +31,6 @@ public abstract class AbstractStorageTest {
     protected static List <String> LIST_OF_PETS_1 = new ArrayList<>();
     protected static final Unit TEXT_LIST_UNIT_FAMILY_1 = new ListUnit(LIST_OF_FAMILY_1);
     protected static final Unit TEXT_LIST_UNIT_PETS_1 = new ListUnit(LIST_OF_PETS_1);
-    protected static List <StructureListUnit> LIST_OF_EDUC_1 = new ArrayList<>();
-    protected static List <StructureListUnit> LIST_OF_WORK_1 = new ArrayList<>();
-    protected static final Unit STRUCTURE_UNIT_EDUCATION_1 = new StructureUnit(LIST_OF_EDUC_1);
-    protected static final Unit STRUCTURE_UNIT_WORK_1 = new StructureUnit(LIST_OF_WORK_1);
 
     public static final String UID2="person2";
     protected static final String FULL_NAME_2 ="PETROV_IS";
@@ -47,10 +43,6 @@ public abstract class AbstractStorageTest {
     protected static List <String> LIST_OF_PETS_2 = new ArrayList<>();
     protected static final Unit TEXT_LIST_UNIT_FAMILY_2 = new ListUnit(LIST_OF_FAMILY_2);
     protected static final Unit TEXT_LIST_UNIT_PETS_2 = new ListUnit(LIST_OF_PETS_2);
-    protected static List <StructureListUnit> LIST_OF_EDUC_2 = new ArrayList<>();
-    protected static List <StructureListUnit> LIST_OF_WORK_2 = new ArrayList<>();
-    protected static final Unit STRUCTURE_UNIT_EDUCATION_2 = new StructureUnit(LIST_OF_EDUC_2);
-    protected static final Unit STRUCTURE_UNIT_WORK_2 = new StructureUnit(LIST_OF_WORK_2);
 
     public static final String UID3="person3";
     protected static final String FULL_NAME_3="SUSLOV_IO";
@@ -63,10 +55,6 @@ public abstract class AbstractStorageTest {
     protected static List <String> LIST_OF_PETS_3 = new ArrayList<>();
     protected static final Unit TEXT_LIST_UNIT_FAMILY_3 = new ListUnit(LIST_OF_FAMILY_3);
     protected static final Unit TEXT_LIST_UNIT_PETS_3 = new ListUnit(LIST_OF_PETS_3);
-    protected static List <StructureListUnit> LIST_OF_EDUC_3 = new ArrayList<>();
-    protected static List <StructureListUnit> LIST_OF_WORK_3 = new ArrayList<>();
-    protected static final Unit STRUCTURE_UNIT_EDUCATION_3 = new StructureUnit(LIST_OF_EDUC_3);
-    protected static final Unit STRUCTURE_UNIT_WORK_3 = new StructureUnit(LIST_OF_WORK_3);
 
     public static final String UID4="person4";
     protected static final String FULL_NAME_4="POPOV_TS";
@@ -79,10 +67,8 @@ public abstract class AbstractStorageTest {
     protected static List <String> LIST_OF_PETS_4 = new ArrayList<>();
     protected static final Unit TEXT_LIST_UNIT_FAMILY_4 = new ListUnit(LIST_OF_FAMILY_4);
     protected static final Unit TEXT_LIST_UNIT_PETS_4 = new ListUnit(LIST_OF_PETS_4);
-    protected static List <StructureListUnit> LIST_OF_EDUC_4 = new ArrayList<>();
-    protected static List <StructureListUnit> LIST_OF_WORK_4 = new ArrayList<>();
-    protected static final Unit STRUCTURE_UNIT_EDUCATION_4 = new StructureUnit(LIST_OF_EDUC_4);
-    protected static final Unit STRUCTURE_UNIT_WORK_4 = new StructureUnit(LIST_OF_WORK_4);
+    protected static List <Structure.StructureListUnit> LIST_OF_EDUC_4 = new ArrayList<>();
+    protected static List <Structure.StructureListUnit> LIST_OF_WORK_4 = new ArrayList<>();
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -90,49 +76,24 @@ public abstract class AbstractStorageTest {
 
     @BeforeEach
      public void setUp() {
-
-        LIST_OF_EDUC_1.add(new StructureListUnit("MGTU","MGTU.RU","MGTU","MGTU",
-                LocalDate.of(Integer.parseInt("1994"), Integer.parseInt("9"), Integer.parseInt("30")),
-                LocalDate.of(Integer.parseInt("1994"), Integer.parseInt("9"), Integer.parseInt("30"))));
-        LIST_OF_WORK_1.add(new StructureListUnit("LUXOFT","LUXOFT.RU","LUXOFT","LUXOFT",
-                LocalDate.of(Integer.parseInt("1996"), Integer.parseInt("1"), Integer.parseInt("10")),
-                LocalDate.of(Integer.parseInt("1997"), Integer.parseInt("2"), Integer.parseInt("12"))));
         LIST_OF_FAMILY_1.add("Отец Григорий");
         LIST_OF_FAMILY_1.add("Мать Наталья");
         LIST_OF_FAMILY_1.add("Сын Олег");
         LIST_OF_PETS_1.add("Хомяк Дмитрий");
         LIST_OF_PETS_1.add("Кот Илья");
 
-        LIST_OF_EDUC_2.add(new StructureListUnit("ABC","ABC.RU","ABC","ABC",
-                LocalDate.of(Integer.parseInt("1994"), Integer.parseInt("9"), Integer.parseInt("30")),
-                LocalDate.of(Integer.parseInt("1994"), Integer.parseInt("9"), Integer.parseInt("30"))));
-        LIST_OF_WORK_2.add(new StructureListUnit("DEF","DEF.RU","DEF","DEF",
-                LocalDate.of(Integer.parseInt("1997"), Integer.parseInt("4"), Integer.parseInt("11")),
-                LocalDate.of(Integer.parseInt("1999"), Integer.parseInt("5"), Integer.parseInt("15"))));
         LIST_OF_FAMILY_2.add("Отец Анатолий");
         LIST_OF_FAMILY_2.add("Мать Надежда");
         LIST_OF_FAMILY_2.add("Дочь Юля");
         LIST_OF_PETS_2.add("Пес Бобби");
         LIST_OF_PETS_2.add("Кошка Уша");
 
-        LIST_OF_EDUC_3.add(new StructureListUnit("MGTU","MGTU.RU","MGTU","MGTU",
-                LocalDate.of(Integer.parseInt("1994"), Integer.parseInt("1"), Integer.parseInt("10")),
-                LocalDate.of(Integer.parseInt("1994"), Integer.parseInt("3"), Integer.parseInt("15"))));
-        LIST_OF_WORK_3.add(new StructureListUnit("LUXOFT","LUXOFT.RU","LUXOFT","LUXOFT",
-                LocalDate.of(Integer.parseInt("1666"), Integer.parseInt("1"), Integer.parseInt("16")),
-                LocalDate.of(Integer.parseInt("1988"), Integer.parseInt("2"), Integer.parseInt("7"))));
         LIST_OF_FAMILY_3.add("Отец Владимир");
         LIST_OF_FAMILY_3.add("Мать Елена");
         LIST_OF_FAMILY_3.add("Сын Андрей");
         LIST_OF_PETS_3.add("Кот Кен");
         LIST_OF_PETS_3.add("Белка Мария");
 
-        LIST_OF_EDUC_4.add(new StructureListUnit("ABC","ABC.RU","ABC","ABC",
-                LocalDate.of(Integer.parseInt("1977"), Integer.parseInt("9"), Integer.parseInt("3")),
-                LocalDate.of(Integer.parseInt("1955"), Integer.parseInt("9"), Integer.parseInt("3"))));
-        LIST_OF_WORK_4.add(new StructureListUnit("DEF","DEF.RU","DEF","DEF",
-                LocalDate.of(Integer.parseInt("2099"), Integer.parseInt("4"), Integer.parseInt("17")),
-                LocalDate.of(Integer.parseInt("2100"), Integer.parseInt("5"), Integer.parseInt("9"))));
         LIST_OF_FAMILY_4.add("Отец Виктор");
         LIST_OF_FAMILY_4.add("Мать Саша");
         LIST_OF_FAMILY_4.add("Дочь Наталь");
@@ -161,32 +122,40 @@ public abstract class AbstractStorageTest {
         CONTACTS_PERSON_4.put(ContactsType.VK,"@vk.com/person4");
 
         INFO_PERSON_1.put(UnitType.FAMILY,TEXT_LIST_UNIT_FAMILY_1);
-        INFO_PERSON_1.put(UnitType.EDUCATION,STRUCTURE_UNIT_EDUCATION_1);
+        INFO_PERSON_1.put(UnitType.EDUCATION, new StructureUnit(new Structure("MGTU", "MGTU.RU",
+                new Structure.StructureListUnit(2210, Month.DECEMBER,2313,Month.APRIL, "MGTU", "MGTU"))));
         INFO_PERSON_1.put(UnitType.HOBBY,TEXT_UNIT_HOBBY_1);
         INFO_PERSON_1.put(UnitType.LOCATION,TEXT_UNIT_LOCATION_1);
         INFO_PERSON_1.put(UnitType.PETS,TEXT_LIST_UNIT_PETS_1);
-        INFO_PERSON_1.put(UnitType.WORK,STRUCTURE_UNIT_WORK_1);
+        INFO_PERSON_1.put(UnitType.WORK,new StructureUnit(new Structure("MISIS", "MISIS.RU",
+                new Structure.StructureListUnit(2211,Month.DECEMBER,"MISIS", "MISIS"))));
 
         INFO_PERSON_2.put(UnitType.FAMILY,TEXT_LIST_UNIT_FAMILY_2);
-        INFO_PERSON_2.put(UnitType.EDUCATION,STRUCTURE_UNIT_EDUCATION_2);
+        INFO_PERSON_2.put(UnitType.EDUCATION,new StructureUnit(new Structure("MAI", "MAI.RU",
+                new Structure.StructureListUnit(2212, Month.DECEMBER,2311,Month.NOVEMBER, "MAI", "MAI"))));
         INFO_PERSON_2.put(UnitType.HOBBY,TEXT_UNIT_HOBBY_2);
         INFO_PERSON_2.put(UnitType.LOCATION,TEXT_UNIT_LOCATION_2);
         INFO_PERSON_2.put(UnitType.PETS,TEXT_LIST_UNIT_PETS_2);
-        INFO_PERSON_2.put(UnitType.WORK,STRUCTURE_UNIT_WORK_2);
+        INFO_PERSON_2.put(UnitType.WORK, new StructureUnit(new Structure("MEI", "MEI.RU",
+                new Structure.StructureListUnit(2213, Month.DECEMBER,2310,Month.SEPTEMBER, "MEI", "MEI"))));
 
         INFO_PERSON_3.put(UnitType.FAMILY,TEXT_LIST_UNIT_FAMILY_3);
-        INFO_PERSON_3.put(UnitType.EDUCATION,STRUCTURE_UNIT_EDUCATION_3);
+        INFO_PERSON_3.put(UnitType.EDUCATION, new StructureUnit(new Structure("PLEHANOV", "PLEHANOV.RU",
+                new Structure.StructureListUnit(2214, Month.DECEMBER,2310,Month.AUGUST, "PLEHANOV", "PLEHANOV"))));
         INFO_PERSON_3.put(UnitType.HOBBY,TEXT_UNIT_HOBBY_3);
         INFO_PERSON_3.put(UnitType.LOCATION,TEXT_UNIT_LOCATION_3);
         INFO_PERSON_3.put(UnitType.PETS,TEXT_LIST_UNIT_PETS_3);
-        INFO_PERSON_3.put(UnitType.WORK,STRUCTURE_UNIT_WORK_3);
+        INFO_PERSON_3.put(UnitType.WORK, new StructureUnit(new Structure("MGU", "MGU.RU",
+                new Structure.StructureListUnit(2215, Month.DECEMBER,2315,Month.APRIL, "MGU", "MGU"))));
 
-        INFO_PERSON_4.put(UnitType.EDUCATION,STRUCTURE_UNIT_EDUCATION_4);
+        INFO_PERSON_4.put(UnitType.EDUCATION, new StructureUnit(new Structure("RGGU", "RGGU.RU",
+                new Structure.StructureListUnit(2210, Month.DECEMBER,2311,Month.MARCH, "RGGU", "RGGU"))));
         INFO_PERSON_4.put(UnitType.LOCATION,TEXT_UNIT_LOCATION_4);
         INFO_PERSON_4.put(UnitType.PETS,TEXT_LIST_UNIT_PETS_4);
         INFO_PERSON_4.put(UnitType.HOBBY,TEXT_UNIT_HOBBY_4);
         INFO_PERSON_4.put(UnitType.FAMILY,TEXT_LIST_UNIT_FAMILY_4);
-        INFO_PERSON_4.put(UnitType.WORK,STRUCTURE_UNIT_WORK_4);
+        INFO_PERSON_4.put(UnitType.WORK, new StructureUnit(new Structure("MEPHI", "MEPHI.RU",
+                new Structure.StructureListUnit(2211, Month.DECEMBER,2316,Month.AUGUST, "MEPHI", "MEPHI"))));
 
 
 

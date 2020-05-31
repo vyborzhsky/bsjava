@@ -29,6 +29,14 @@ public class Person implements Comparable<Person>{
         return uid;
     }
 
+    public void put(ContactsType type, String val) {
+        contacts.put(type, val);
+    }
+
+    public void addUnit(UnitType type, Unit val) {
+        info.put(type, val);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
