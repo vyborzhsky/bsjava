@@ -1,6 +1,6 @@
 package com.rkubyshkin.model;
 
-public enum Contacts extends Structure {
+public enum ContactsType {
     NUMBERPHONE("Телефон"),
     EMAIL("Email"),
     TELEGRAM("Telegram"),
@@ -9,18 +9,8 @@ public enum Contacts extends Structure {
 
     private String contactsTitle;
 
-    private String value;
-
-    Contacts(String ContactsTitle) {
+    ContactsType(String ContactsTitle) {
         this.contactsTitle = ContactsTitle;
-    }
-
-    public String getContactsValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
 }

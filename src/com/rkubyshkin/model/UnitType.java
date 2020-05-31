@@ -1,12 +1,12 @@
 package com.rkubyshkin.model;
 
 public enum UnitType {
-    FAMILY("Близкие родственники"),
-    WORK("Работа"),
-    HOBBY("Хобби"),
-    EDUCATION("Образование"),
-    LOCATION("Город проживания"),
-    PETS("Домашние животные");
+    FAMILY("Близкие родственники"), //LIST
+    WORK("Работа"), //STRUCTIRELIST
+    HOBBY("Хобби"), //TEXT
+    EDUCATION("Образование"), //STRUCTURELIST
+    LOCATION("Город проживания"), //TEXT
+    PETS("Домашние животные");  // LIST
 
     private String infoTitle;
 

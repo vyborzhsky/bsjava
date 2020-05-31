@@ -4,20 +4,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class StructureUnit extends Unit{
-    private final List<Structure> structure;
+    private final List<StructureListUnit> structureListUnits;
 
-    public StructureUnit(List<Structure> structure) {
-        Objects.requireNonNull(structure, "structure must not be null");
-        this.structure = structure;
+    public StructureUnit(List<StructureListUnit> structureListUnits) {
+        this.structureListUnits = structureListUnits;
     }
 
-    public List<Structure> getStructure() {
-        return structure;
+    public List<StructureListUnit> getStructureListUnits() {
+        return structureListUnits;
     }
 
     @Override
     public String toString() {
-        return structure.toString();
+        return structureListUnits.toString();
     }
 
     @Override
@@ -25,11 +24,11 @@ public class StructureUnit extends Unit{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StructureUnit that = (StructureUnit) o;
-        return structure.equals(that.structure);
+        return structureListUnits.equals(that.structureListUnits);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(structure);
+        return Objects.hash(structureListUnits);
     }
 }
