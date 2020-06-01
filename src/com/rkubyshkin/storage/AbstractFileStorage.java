@@ -2,6 +2,7 @@ package com.rkubyshkin.storage;
 
 import com.rkubyshkin.exception.StorageException;
 import com.rkubyshkin.model.Person;
+import com.rkubyshkin.storage.serialize.SerializerStream;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 public abstract class AbstractFileStorage extends AbstractStorage<File> {
    private File directoryOfResumes;
+   private SerializerStream serializerStream;
 
     @Override
     public boolean equals(Object o) {
@@ -24,8 +26,9 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         return Objects.hash(directoryOfResumes);
     }
 
-    protected AbstractFileStorage(File directoryOfResumes) {
+    protected AbstractFileStorage(File directoryOfResumes, SerializerStream serializerStream) {
         Objects.requireNonNull(directoryOfResumes, "directoryOfResume must not be null");
+        this.serializerStream = serializerStream;
         if(!directoryOfResumes.isDirectory()) {
             throw new IllegalArgumentException(directoryOfResumes.getAbsolutePath() + " is not directory");
         }
@@ -35,16 +38,12 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         this.directoryOfResumes = directoryOfResumes;
     }
 
-    protected abstract void doWrite(Person r, OutputStream outStream) throws IOException;
-
-    protected abstract Person doRead(InputStream inStream) throws IOException;
-
     @Override
     protected List<Person> doGetAllSorted() {
         List<Person> listOfPersons= new ArrayList<>();
         for (File a : directoryOfResumes.listFiles()) {
             try {
-                Person person = doRead(new BufferedInputStream(new FileInputStream(a)));
+                Person person = serializerStream.doRead(new BufferedInputStream(new FileInputStream(a)));
                 listOfPersons.add(person);
             } catch (IOException e) {
                 throw new StorageException("IO ERROR", a.getName(), e);
@@ -56,7 +55,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected Person doGet(File file) {
         try {
-            return doRead(new BufferedInputStream(new FileInputStream(file)));
+            return serializerStream.doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("Can't read file, ERROR", file.getName(), e);
         }
@@ -80,7 +79,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(Person r, File file) {
         try {
-            doWrite(r, new BufferedOutputStream(new FileOutputStream(file)));
+            serializerStream.doWrite(r, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("Can't write file, ERROR", r.getUid(), e);
         }
@@ -111,7 +110,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     public int size() {
         String[] list = directoryOfResumes.list();
         if(list == null) {
-            throw new StorageException("Directory error read ", null);
+            throw new StorageException("Directory error read ");
         }
         return list.length;
     }
