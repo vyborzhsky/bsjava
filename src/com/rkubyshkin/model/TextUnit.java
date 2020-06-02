@@ -1,11 +1,21 @@
 package com.rkubyshkin.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Objects;
 
 public class TextUnit extends Unit{
     private static final long serialVersionUID = 1L;
 
-    private final String textContent;
+    private  String textContent;
+
+    public TextUnit() {
+    }
+
+    public TextUnit(String textContent) {
+        Objects.requireNonNull(textContent, "textContent must not be null");
+        this.textContent = textContent;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -18,10 +28,5 @@ public class TextUnit extends Unit{
     @Override
     public int hashCode() {
         return Objects.hash(textContent);
-    }
-
-    public TextUnit(String textContent) {
-        Objects.requireNonNull(textContent, "textContent must not be null");
-        this.textContent = textContent;
     }
 }

@@ -1,12 +1,16 @@
 package com.rkubyshkin.model;
 
-import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Objects;
 
 public class StructureUnit extends Unit{
     private static final long serialVersionUID = 1L;
 
-    private final Structure structure;
+    private  Structure structure;
+
+    public StructureUnit() {
+    }
 
     public StructureUnit(Structure structure) {
         this.structure = structure;

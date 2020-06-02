@@ -1,6 +1,11 @@
 package com.rkubyshkin.model;
 
 
+import com.rkubyshkin.util.AdapterLocalDate;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,12 +16,15 @@ import java.util.Objects;
 import static com.rkubyshkin.util.DateUtil.NOW;
 import static com.rkubyshkin.util.DateUtil.of;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Structure implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final Link homePage;
+    private Link homePage;
     private List<StructureListUnit> position;
+
+    public Structure() {
+    }
 
     public Structure(String nameSite, String url, StructureListUnit... position) {
         this(new Link(nameSite, url), Arrays.asList(position));
@@ -49,13 +57,18 @@ public class Structure implements Serializable {
         return Objects.hash(homePage, position);
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class StructureListUnit implements Serializable{
         private static final long serialVersionUID = 1L;
+        @XmlJavaTypeAdapter(AdapterLocalDate.class)
+        private  LocalDate startCareerDate;
+        @XmlJavaTypeAdapter(AdapterLocalDate.class)
+        private  LocalDate endCareerDate;
+        private  String tittle;
+        private  String desc;
 
-        private final LocalDate startCareerDate;
-        private final LocalDate endCareerDate;
-        private final String tittle;
-        private final String desc;
+        public StructureListUnit() {
+        }
 
         public StructureListUnit(int startCareerYear , Month startCareerMonth, int endCareerYear , Month endCareerMonth, String desc, String tittle) {
             this(of(startCareerYear, startCareerMonth), of(endCareerYear, endCareerMonth), desc, tittle);

@@ -1,12 +1,17 @@
 package com.rkubyshkin.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 import java.util.Objects;
 
 public class ListUnit extends Unit{
     private static final long serialVersionUID = 1L;
 
-    private final List<String> items;
+    private List<String> items;
+
+    public ListUnit() {
+    }
 
     public ListUnit(List<String> items) {
         Objects.requireNonNull(items, "items must not be null");

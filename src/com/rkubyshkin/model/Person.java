@@ -1,17 +1,25 @@
 package com.rkubyshkin.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person implements Comparable<Person>, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final String uid;
-    private final String fullName;
+    private  String uid;
+    private  String fullName;
     private Map<ContactsType, String> contacts;
     private Map<UnitType, Unit> info;
+
+    public Person() {
+    }
 
     public Person(String fullName, Map<UnitType, Unit> info, Map<ContactsType, String> contacts) {
         this(UUID.randomUUID().toString(), fullName, info, contacts);
@@ -32,7 +40,7 @@ public class Person implements Comparable<Person>, Serializable {
         return uid;
     }
 
-    public void put(ContactsType type, String val) {
+    public void addContact(ContactsType type, String val) {
         contacts.put(type, val);
     }
 
