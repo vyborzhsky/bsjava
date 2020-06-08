@@ -9,6 +9,10 @@ public class TextUnit extends Unit{
 
     private  String textContent;
 
+    public String getTextContent() {
+        return textContent;
+    }
+
     public TextUnit() {
     }
 

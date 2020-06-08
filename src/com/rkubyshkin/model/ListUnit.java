@@ -2,6 +2,7 @@ package com.rkubyshkin.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,11 +13,18 @@ public class ListUnit extends Unit{
 
     public ListUnit() {
     }
+    public ListUnit(String... list) {
+        this(Arrays.asList(list));
+    }
 
     public ListUnit(List<String> items) {
         Objects.requireNonNull(items, "items must not be null");
 
         this.items = items;
+    }
+
+    public List<String> getItems() {
+        return items;
     }
 
     @Override

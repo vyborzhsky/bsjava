@@ -2,21 +2,27 @@ package com.rkubyshkin.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class StructureUnit extends Unit{
     private static final long serialVersionUID = 1L;
 
-    private  Structure structure;
+    private List<Structure> structure;
 
     public StructureUnit() {
     }
 
-    public StructureUnit(Structure structure) {
+    public StructureUnit(List<Structure> structure) {
         this.structure = structure;
     }
 
-    public Structure getStructure() {
+    public StructureUnit(Structure... structure) {
+        this(Arrays.asList(structure));
+    }
+
+    public List<Structure> getStructure() {
         return structure;
     }
 

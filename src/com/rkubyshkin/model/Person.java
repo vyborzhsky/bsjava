@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,20 +22,34 @@ public class Person implements Comparable<Person>, Serializable {
     public Person() {
     }
 
+    public Person(String uid, String fullName) {
+        Objects.requireNonNull(fullName, "fullName must not be null");
+        Objects.requireNonNull(uid, "uid must not be null");
+        this.uid = uid;
+        this.fullName = fullName;
+        this.contacts = new EnumMap<>(ContactsType.class);
+        this.info = new EnumMap<>(UnitType.class);
+    }
+    public Person(String fullName) {
+        this(UUID.randomUUID().toString(), fullName);
+    }
     public Person(String fullName, Map<UnitType, Unit> info, Map<ContactsType, String> contacts) {
         this(UUID.randomUUID().toString(), fullName, info, contacts);
     }
 
     public Person(String uid, String fullName, Map<UnitType, Unit> info, Map<ContactsType, String> contacts) {
-
-        Objects.requireNonNull(fullName, "fullName must not be null");
-        Objects.requireNonNull(uid, "uid must not be null");
-        this.uid = uid;
-        this.fullName = fullName;
+        this(uid, fullName);
         this.contacts = contacts;
         this.info = info;
     }
 
+    public Map<ContactsType, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<UnitType, Unit> getInfo() {
+        return info;
+    }
 
     public String getUid(){
         return uid;
@@ -77,13 +92,5 @@ public class Person implements Comparable<Person>, Serializable {
 
     public String getFullName() {
         return fullName;
-    }
-
-    public Unit getInfo(UnitType type) {
-        return info.get(type);
-    }
-
-    public String getContacts(ContactsType type) {
-        return contacts.get(type);
     }
 }

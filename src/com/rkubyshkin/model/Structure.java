@@ -35,6 +35,15 @@ public class Structure implements Serializable {
         this.position = position;
 
     }
+
+    public Link getHomePage() {
+        return homePage;
+    }
+
+    public List<StructureListUnit> getPosition() {
+        return position;
+    }
+
     @Override
     public String toString() {
         return "Structure{" +
@@ -66,6 +75,22 @@ public class Structure implements Serializable {
         private  LocalDate endCareerDate;
         private  String tittle;
         private  String desc;
+
+        public LocalDate getStartCareerDate() {
+            return startCareerDate;
+        }
+
+        public LocalDate getEndCareerDate() {
+            return endCareerDate;
+        }
+
+        public String getTittle() {
+            return tittle;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
 
         public StructureListUnit() {
         }

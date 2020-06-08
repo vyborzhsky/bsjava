@@ -98,14 +98,14 @@ public abstract class AbstractStorageTest {
 
         LIST_OF_FAMILY_4.add("Отец Виктор");
         LIST_OF_FAMILY_4.add("Мать Саша");
-        LIST_OF_FAMILY_4.add("Дочь Наталь");
+        LIST_OF_FAMILY_4.add("Дочь Наталья");
         LIST_OF_PETS_4.add("Угорь Илюша");
         LIST_OF_PETS_4.add("Питон Болли");
 
         CONTACTS_PERSON_1.put(ContactsType.EMAIL,"person1@gmail.com");
         CONTACTS_PERSON_2.put(ContactsType.EMAIL,"person2@gmail.com");
         CONTACTS_PERSON_3.put(ContactsType.EMAIL,"person3@gmail.com");
-        CONTACTS_PERSON_3.put(ContactsType.EMAIL,"person4@gmail.com");
+        CONTACTS_PERSON_4.put(ContactsType.EMAIL,"person4@gmail.com");
         CONTACTS_PERSON_1.put(ContactsType.NUMBERPHONE,"+89260000000");
         CONTACTS_PERSON_2.put(ContactsType.NUMBERPHONE,"+89261111111");
         CONTACTS_PERSON_3.put(ContactsType.NUMBERPHONE,"+89262222222");
@@ -125,7 +125,12 @@ public abstract class AbstractStorageTest {
 
         INFO_PERSON_1.put(UnitType.FAMILY,TEXT_LIST_UNIT_FAMILY_1);
         INFO_PERSON_1.put(UnitType.EDUCATION, new StructureUnit(new Structure("MGTU", "MGTU.RU",
-                new Structure.StructureListUnit(2210, Month.DECEMBER,2313,Month.APRIL, "MGTU", "MGTU"))));
+                new Structure.StructureListUnit(
+                        2210, Month.DECEMBER,2311,Month.APRIL, "MGTU", "MGTU")),
+                new Structure("MGTU2", "MGTU2.RU",
+                        new Structure.StructureListUnit(
+                                2212, Month.DECEMBER,2315,Month.APRIL, "MGTU2", "MGTU2"))
+        ));
         INFO_PERSON_1.put(UnitType.HOBBY,TEXT_UNIT_HOBBY_1);
         INFO_PERSON_1.put(UnitType.LOCATION,TEXT_UNIT_LOCATION_1);
         INFO_PERSON_1.put(UnitType.PETS,TEXT_LIST_UNIT_PETS_1);
