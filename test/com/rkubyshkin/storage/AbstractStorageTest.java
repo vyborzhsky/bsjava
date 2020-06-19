@@ -1,5 +1,6 @@
 package com.rkubyshkin.storage;
 
+import com.rkubyshkin.Config;
 import com.rkubyshkin.exception.ExistStorageException;
 import com.rkubyshkin.exception.NotExistStorageException;
 import com.rkubyshkin.model.*;
@@ -20,13 +21,13 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractStorageTest {
-    protected static final File DIR_STORAGE = new File("C:/Users/Владимир/Documents/GitHub/bsjava/storage");
+    protected static final File DIR_STORAGE = Config.get().getStorageDir();
     protected static Storage storage;
     public static final String UID1="person1";
     protected static final String FULL_NAME_1 ="IVANOV_AP";
     protected static final Map<ContactsType, String> CONTACTS_PERSON_1 = new EnumMap<>(ContactsType.class);
     protected static final Map<UnitType, Unit> INFO_PERSON_1 = new EnumMap<>(UnitType.class);
-    protected static final Person PERSON_1 = new Person(UID1,FULL_NAME_1, INFO_PERSON_1, CONTACTS_PERSON_1);
+    protected static final Person PERSON_1 = new Person(UID1,FULL_NAME_1/*, INFO_PERSON_1, CONTACTS_PERSON_1*/);
     protected static final Unit TEXT_UNIT_LOCATION_1 = new TextUnit("Moscow City Portneu st. d1. kv87");
     protected static final Unit TEXT_UNIT_HOBBY_1 = new TextUnit("Я занимаюсь вязанием и пошивом штанов");
     protected static List <String> LIST_OF_FAMILY_1 = new ArrayList<>();
@@ -38,7 +39,7 @@ public abstract class AbstractStorageTest {
     protected static final String FULL_NAME_2 ="PETROV_IS";
     protected static final Map<ContactsType, String> CONTACTS_PERSON_2 = new EnumMap<>(ContactsType.class);
     protected static final Map<UnitType, Unit> INFO_PERSON_2 = new EnumMap<>(UnitType.class);
-    protected static final Person PERSON_2 = new Person(UID2,FULL_NAME_2, INFO_PERSON_2, CONTACTS_PERSON_2);
+    protected static final Person PERSON_2 = new Person(UID2,FULL_NAME_2/*, INFO_PERSON_2, CONTACTS_PERSON_2*/);
     protected static final Unit TEXT_UNIT_LOCATION_2 = new TextUnit("SaintPeter City Abraham st. d2. kv1");
     protected static final Unit TEXT_UNIT_HOBBY_2 = new TextUnit("Я занимаюсь выращиванием огурцов");
     protected static List <String> LIST_OF_FAMILY_2 = new ArrayList<>();
@@ -50,7 +51,7 @@ public abstract class AbstractStorageTest {
     protected static final String FULL_NAME_3="SUSLOV_IO";
     protected static final Map<ContactsType, String> CONTACTS_PERSON_3 = new EnumMap<>(ContactsType.class);
     protected static final Map<UnitType, Unit> INFO_PERSON_3 = new EnumMap<>(UnitType.class);
-    protected static final Person PERSON_3 = new Person(UID3,FULL_NAME_3, INFO_PERSON_3, CONTACTS_PERSON_3);
+    protected static final Person PERSON_3 = new Person(UID3,FULL_NAME_3/*, INFO_PERSON_3, CONTACTS_PERSON_3*/);
     protected static final Unit TEXT_UNIT_LOCATION_3 = new TextUnit("Reutov City Goooots st. d7. kv33");
     protected static final Unit TEXT_UNIT_HOBBY_3 = new TextUnit("Я занимаюсь строительством домов");
     protected static List <String> LIST_OF_FAMILY_3 = new ArrayList<>();
@@ -62,7 +63,7 @@ public abstract class AbstractStorageTest {
     protected static final String FULL_NAME_4="POPOV_TS";
     protected static final Map<ContactsType, String> CONTACTS_PERSON_4 = new EnumMap<>(ContactsType.class);
     protected static final Map<UnitType, Unit> INFO_PERSON_4 = new EnumMap<>(UnitType.class);
-    protected static final Person PERSON_4 = new Person(UID4,FULL_NAME_4, INFO_PERSON_4, CONTACTS_PERSON_4);
+    protected static final Person PERSON_4 = new Person(UID4,FULL_NAME_4/*, INFO_PERSON_4, CONTACTS_PERSON_4*/);
     protected static final Unit TEXT_UNIT_LOCATION_4 = new TextUnit("Novosibirsk City Treutt st. d1. kv66");
     protected static final Unit TEXT_UNIT_HOBBY_4 = new TextUnit("Я занимаюсь коллекционированием машин");
     protected static List <String> LIST_OF_FAMILY_4 = new ArrayList<>();
@@ -78,7 +79,7 @@ public abstract class AbstractStorageTest {
 
     @BeforeEach
      public void setUp() {
-        LIST_OF_FAMILY_1.add("Отец Григорий");
+        /*LIST_OF_FAMILY_1.add("Отец Григорий");
         LIST_OF_FAMILY_1.add("Мать Наталья");
         LIST_OF_FAMILY_1.add("Сын Олег");
         LIST_OF_PETS_1.add("Хомяк Дмитрий");
@@ -164,7 +165,7 @@ public abstract class AbstractStorageTest {
         INFO_PERSON_4.put(UnitType.WORK, new StructureUnit(new Structure("MEPHI", "MEPHI.RU",
                 new Structure.StructureListUnit(2211, Month.DECEMBER,2316,Month.AUGUST, "MEPHI", "MEPHI"))));
 
-
+*/
 
 
 
@@ -211,7 +212,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Person person = new Person(UID1,FULL_NAME_1, INFO_PERSON_1, CONTACTS_PERSON_1);
+        Person person = new Person(UID1,FULL_NAME_1/*, INFO_PERSON_1, CONTACTS_PERSON_1*/);
         storage.update(person);
         assertTrue(person.equals(storage.get(UID1)));
 
